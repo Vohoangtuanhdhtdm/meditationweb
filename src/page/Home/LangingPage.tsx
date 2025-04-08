@@ -5,56 +5,7 @@ import { motion } from "framer-motion"; // Assuming framer-motion is installed f
 
 const LandingPage = () => {
   return (
-    <div className="min-h-screen bg-gradient-to-br from-teal-50 via-white to-lime-50">
-      {/* Header */}
-      <header className="container mx-auto px-6 py-8 flex justify-between items-center sticky top-0 z-50 bg-white/80 backdrop-blur-md shadow-sm">
-        <div className="flex items-center gap-3">
-          <motion.div
-            className="w-10 h-10 bg-gradient-to-r from-teal-500 to-lime-500 rounded-full"
-            whileHover={{ scale: 1.1 }}
-            transition={{ type: "spring", stiffness: 300 }}
-          />
-          <span className="text-2xl font-extrabold text-gray-900 tracking-tight">
-            Presence
-          </span>
-        </div>
-        <nav className="flex items-center gap-6">
-          <Button
-            variant="ghost"
-            className="text-teal-600 font-semibold hover:text-teal-800 transition-colors"
-          >
-            Home
-          </Button>
-          <Button
-            variant="ghost"
-            className="text-gray-700 hover:text-teal-600 transition-colors"
-          >
-            Product
-          </Button>
-          <Button
-            variant="ghost"
-            className="text-gray-700 hover:text-teal-600 transition-colors"
-          >
-            Service
-          </Button>
-          <Button
-            variant="ghost"
-            className="text-gray-700 hover:text-teal-600 transition-colors"
-          >
-            About
-          </Button>
-          <Button
-            variant="ghost"
-            className="text-gray-700 hover:text-teal-600 transition-colors"
-          >
-            Login
-          </Button>
-          <Button className="bg-gradient-to-r from-teal-500 to-lime-500 hover:from-teal-600 hover:to-lime-600 text-white rounded-full px-6 shadow-lg transition-all">
-            Sign In
-          </Button>
-        </nav>
-      </header>
-
+    <div>
       {/* Hero Section */}
       <section className="container mx-auto px-6 py-20 flex flex-col lg:flex-row items-center gap-16">
         {/* Left Side - Main Content */}
@@ -67,15 +18,26 @@ const LandingPage = () => {
           {/* Background Image */}
           <div className="relative w-full h-[550px] rounded-3xl overflow-hidden shadow-2xl">
             <img
-              src="https://i.pinimg.com/736x/d2/a2/81/d2a281e96ac97ac95acc9d665becf709.jpg"
+              src="https://i.pinimg.com/736x/ac/1c/8a/ac1c8ab20d9736068b8f5ee2128d59da.jpg"
               alt="Meditation"
               className="w-full h-full object-cover transform hover:scale-105 transition-transform duration-500"
             />
+
             {/* Overlay Card */}
-            <Card className="absolute bottom-10 left-10 w-72 bg-white/90 backdrop-blur-lg shadow-lg rounded-xl">
+            <Card
+              className="absolute bottom-10 right-10 w-72"
+              style={{
+                background: "rgba(255, 255, 255, 0.04)",
+                borderRadius: "16px",
+                boxShadow: "0 4px 30px rgba(0, 0, 0, 0.1)",
+                backdropFilter: "blur(5px)",
+                WebkitBackdropFilter: "blur(5px)",
+                border: "1px solid rgba(255, 255, 255, 0.08)",
+              }}
+            >
               <CardContent className="p-6">
-                <p className="text-5xl font-extrabold text-teal-600">240+</p>
-                <p className="text-sm text-gray-700 mt-2 font-medium">
+                <p className="text-5xl font-bold text-blue-300">240+</p>
+                <p className="text-sm text-gray-200 mt-2 font-medium">
                   Souls finding peace and clarity every day
                 </p>
               </CardContent>
@@ -83,10 +45,20 @@ const LandingPage = () => {
           </div>
 
           {/* Text Overlay */}
-          <div className="absolute top-10 left-10">
-            <h1 className="text-6xl font-extrabold text-gray-900 leading-tight tracking-tight">
+          <div
+            className="absolute border p-4 top-10 left-10"
+            style={{
+              background: "rgba(255, 255, 255, 0.04)",
+              borderRadius: "16px",
+              boxShadow: "0 4px 30px rgba(0, 0, 0, 0.1)",
+              backdropFilter: "blur(5px)",
+              WebkitBackdropFilter: "blur(5px)",
+              border: "1px solid rgba(255, 255, 255, 0.08)",
+            }}
+          >
+            <h1 className="text-6xl font-semibold leading-tight tracking-tight">
               Mindfulness <br />
-              Brings <span className="text-teal-500">Calm</span> <br />& Meaning
+              Brings <span className="text-teal-600">Calm</span> <br />& Meaning
             </h1>
             <div className="flex items-center gap-3 mt-6">
               <span className="w-5 h-5 rounded-full bg-teal-200 animate-pulse"></span>
@@ -97,7 +69,7 @@ const LandingPage = () => {
           </div>
 
           {/* Description and Buttons */}
-          <div className="mt-8 max-w-lg">
+          <div className="mt-8 max-w-lg ">
             <p className="text-gray-700 text-lg leading-relaxed">
               Discover a vibrant blend of yoga, meditation, and modern wellness
               techniques designed to spark harmony and inner peace.
