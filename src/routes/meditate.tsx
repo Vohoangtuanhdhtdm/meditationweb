@@ -1,9 +1,14 @@
 import { createFileRoute } from '@tanstack/react-router'
+import MeditatePage from "@/Content/MeditatePage";
 
-export const Route = createFileRoute('/meditate')({
-  component: RouteComponent,
-})
+export const Route = createFileRoute("/meditate")({
+  component: Index,
+});
 
-function RouteComponent() {
-  return <div>Hello "/meditate"!</div>
+function Index() {
+  return (
+    <div>
+      <MeditatePage />
+    </div>
+  );
 }
