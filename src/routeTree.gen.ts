@@ -13,13 +13,14 @@ import { createFileRoute } from '@tanstack/react-router'
 // Import Routes
 
 import { Route as rootRoute } from './routes/__root'
-import { Route as MeditateImport } from './routes/meditate'
-import { Route as DmtImport } from './routes/dmt'
-import { Route as DisciplineImport } from './routes/discipline'
 import { Route as IndexImport } from './routes/index'
 import { Route as PostsIndexImport } from './routes/posts/index'
+import { Route as CourseIndexImport } from './routes/course/index'
 import { Route as PostsPostIdImport } from './routes/posts/$postId'
 import { Route as PlanPlanPageImport } from './routes/plan/PlanPage'
+import { Route as CourseCourseIdImport } from './routes/course/$courseId'
+import { Route as AuthRegisterImport } from './routes/auth/register'
+import { Route as AuthLoginImport } from './routes/auth/login'
 import { Route as SignSignupImport } from './routes/Sign/Signup'
 import { Route as SignSigninImport } from './routes/Sign/Signin'
 
@@ -35,24 +36,6 @@ const AboutLazyRoute = AboutLazyImport.update({
   getParentRoute: () => rootRoute,
 } as any).lazy(() => import('./routes/about.lazy').then((d) => d.Route))
 
-const MeditateRoute = MeditateImport.update({
-  id: '/meditate',
-  path: '/meditate',
-  getParentRoute: () => rootRoute,
-} as any)
-
-const DmtRoute = DmtImport.update({
-  id: '/dmt',
-  path: '/dmt',
-  getParentRoute: () => rootRoute,
-} as any)
-
-const DisciplineRoute = DisciplineImport.update({
-  id: '/discipline',
-  path: '/discipline',
-  getParentRoute: () => rootRoute,
-} as any)
-
 const IndexRoute = IndexImport.update({
   id: '/',
   path: '/',
@@ -65,6 +48,12 @@ const PostsIndexRoute = PostsIndexImport.update({
   getParentRoute: () => rootRoute,
 } as any)
 
+const CourseIndexRoute = CourseIndexImport.update({
+  id: '/course/',
+  path: '/course/',
+  getParentRoute: () => rootRoute,
+} as any)
+
 const PostsPostIdRoute = PostsPostIdImport.update({
   id: '/posts/$postId',
   path: '/posts/$postId',
@@ -74,6 +63,24 @@ const PostsPostIdRoute = PostsPostIdImport.update({
 const PlanPlanPageRoute = PlanPlanPageImport.update({
   id: '/plan/PlanPage',
   path: '/plan/PlanPage',
+  getParentRoute: () => rootRoute,
+} as any)
+
+const CourseCourseIdRoute = CourseCourseIdImport.update({
+  id: '/course/$courseId',
+  path: '/course/$courseId',
+  getParentRoute: () => rootRoute,
+} as any)
+
+const AuthRegisterRoute = AuthRegisterImport.update({
+  id: '/auth/register',
+  path: '/auth/register',
+  getParentRoute: () => rootRoute,
+} as any)
+
+const AuthLoginRoute = AuthLoginImport.update({
+  id: '/auth/login',
+  path: '/auth/login',
   getParentRoute: () => rootRoute,
 } as any)
 
@@ -100,27 +107,6 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof IndexImport
       parentRoute: typeof rootRoute
     }
-    '/discipline': {
-      id: '/discipline'
-      path: '/discipline'
-      fullPath: '/discipline'
-      preLoaderRoute: typeof DisciplineImport
-      parentRoute: typeof rootRoute
-    }
-    '/dmt': {
-      id: '/dmt'
-      path: '/dmt'
-      fullPath: '/dmt'
-      preLoaderRoute: typeof DmtImport
-      parentRoute: typeof rootRoute
-    }
-    '/meditate': {
-      id: '/meditate'
-      path: '/meditate'
-      fullPath: '/meditate'
-      preLoaderRoute: typeof MeditateImport
-      parentRoute: typeof rootRoute
-    }
     '/about': {
       id: '/about'
       path: '/about'
@@ -142,6 +128,27 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof SignSignupImport
       parentRoute: typeof rootRoute
     }
+    '/auth/login': {
+      id: '/auth/login'
+      path: '/auth/login'
+      fullPath: '/auth/login'
+      preLoaderRoute: typeof AuthLoginImport
+      parentRoute: typeof rootRoute
+    }
+    '/auth/register': {
+      id: '/auth/register'
+      path: '/auth/register'
+      fullPath: '/auth/register'
+      preLoaderRoute: typeof AuthRegisterImport
+      parentRoute: typeof rootRoute
+    }
+    '/course/$courseId': {
+      id: '/course/$courseId'
+      path: '/course/$courseId'
+      fullPath: '/course/$courseId'
+      preLoaderRoute: typeof CourseCourseIdImport
+      parentRoute: typeof rootRoute
+    }
     '/plan/PlanPage': {
       id: '/plan/PlanPage'
       path: '/plan/PlanPage'
@@ -154,6 +161,13 @@ declare module '@tanstack/react-router' {
       path: '/posts/$postId'
       fullPath: '/posts/$postId'
       preLoaderRoute: typeof PostsPostIdImport
+      parentRoute: typeof rootRoute
+    }
+    '/course/': {
+      id: '/course/'
+      path: '/course'
+      fullPath: '/course'
+      preLoaderRoute: typeof CourseIndexImport
       parentRoute: typeof rootRoute
     }
     '/posts/': {
@@ -170,41 +184,44 @@ declare module '@tanstack/react-router' {
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
-  '/discipline': typeof DisciplineRoute
-  '/dmt': typeof DmtRoute
-  '/meditate': typeof MeditateRoute
   '/about': typeof AboutLazyRoute
   '/Sign/Signin': typeof SignSigninRoute
   '/Sign/Signup': typeof SignSignupRoute
+  '/auth/login': typeof AuthLoginRoute
+  '/auth/register': typeof AuthRegisterRoute
+  '/course/$courseId': typeof CourseCourseIdRoute
   '/plan/PlanPage': typeof PlanPlanPageRoute
   '/posts/$postId': typeof PostsPostIdRoute
+  '/course': typeof CourseIndexRoute
   '/posts': typeof PostsIndexRoute
 }
 
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
-  '/discipline': typeof DisciplineRoute
-  '/dmt': typeof DmtRoute
-  '/meditate': typeof MeditateRoute
   '/about': typeof AboutLazyRoute
   '/Sign/Signin': typeof SignSigninRoute
   '/Sign/Signup': typeof SignSignupRoute
+  '/auth/login': typeof AuthLoginRoute
+  '/auth/register': typeof AuthRegisterRoute
+  '/course/$courseId': typeof CourseCourseIdRoute
   '/plan/PlanPage': typeof PlanPlanPageRoute
   '/posts/$postId': typeof PostsPostIdRoute
+  '/course': typeof CourseIndexRoute
   '/posts': typeof PostsIndexRoute
 }
 
 export interface FileRoutesById {
   __root__: typeof rootRoute
   '/': typeof IndexRoute
-  '/discipline': typeof DisciplineRoute
-  '/dmt': typeof DmtRoute
-  '/meditate': typeof MeditateRoute
   '/about': typeof AboutLazyRoute
   '/Sign/Signin': typeof SignSigninRoute
   '/Sign/Signup': typeof SignSignupRoute
+  '/auth/login': typeof AuthLoginRoute
+  '/auth/register': typeof AuthRegisterRoute
+  '/course/$courseId': typeof CourseCourseIdRoute
   '/plan/PlanPage': typeof PlanPlanPageRoute
   '/posts/$postId': typeof PostsPostIdRoute
+  '/course/': typeof CourseIndexRoute
   '/posts/': typeof PostsIndexRoute
 }
 
@@ -212,65 +229,70 @@ export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
   fullPaths:
     | '/'
-    | '/discipline'
-    | '/dmt'
-    | '/meditate'
     | '/about'
     | '/Sign/Signin'
     | '/Sign/Signup'
+    | '/auth/login'
+    | '/auth/register'
+    | '/course/$courseId'
     | '/plan/PlanPage'
     | '/posts/$postId'
+    | '/course'
     | '/posts'
   fileRoutesByTo: FileRoutesByTo
   to:
     | '/'
-    | '/discipline'
-    | '/dmt'
-    | '/meditate'
     | '/about'
     | '/Sign/Signin'
     | '/Sign/Signup'
+    | '/auth/login'
+    | '/auth/register'
+    | '/course/$courseId'
     | '/plan/PlanPage'
     | '/posts/$postId'
+    | '/course'
     | '/posts'
   id:
     | '__root__'
     | '/'
-    | '/discipline'
-    | '/dmt'
-    | '/meditate'
     | '/about'
     | '/Sign/Signin'
     | '/Sign/Signup'
+    | '/auth/login'
+    | '/auth/register'
+    | '/course/$courseId'
     | '/plan/PlanPage'
     | '/posts/$postId'
+    | '/course/'
     | '/posts/'
   fileRoutesById: FileRoutesById
 }
 
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
-  DisciplineRoute: typeof DisciplineRoute
-  DmtRoute: typeof DmtRoute
-  MeditateRoute: typeof MeditateRoute
   AboutLazyRoute: typeof AboutLazyRoute
   SignSigninRoute: typeof SignSigninRoute
   SignSignupRoute: typeof SignSignupRoute
+  AuthLoginRoute: typeof AuthLoginRoute
+  AuthRegisterRoute: typeof AuthRegisterRoute
+  CourseCourseIdRoute: typeof CourseCourseIdRoute
   PlanPlanPageRoute: typeof PlanPlanPageRoute
   PostsPostIdRoute: typeof PostsPostIdRoute
+  CourseIndexRoute: typeof CourseIndexRoute
   PostsIndexRoute: typeof PostsIndexRoute
 }
 
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
-  DisciplineRoute: DisciplineRoute,
-  DmtRoute: DmtRoute,
-  MeditateRoute: MeditateRoute,
   AboutLazyRoute: AboutLazyRoute,
   SignSigninRoute: SignSigninRoute,
   SignSignupRoute: SignSignupRoute,
+  AuthLoginRoute: AuthLoginRoute,
+  AuthRegisterRoute: AuthRegisterRoute,
+  CourseCourseIdRoute: CourseCourseIdRoute,
   PlanPlanPageRoute: PlanPlanPageRoute,
   PostsPostIdRoute: PostsPostIdRoute,
+  CourseIndexRoute: CourseIndexRoute,
   PostsIndexRoute: PostsIndexRoute,
 }
 
@@ -285,28 +307,20 @@ export const routeTree = rootRoute
       "filePath": "__root.tsx",
       "children": [
         "/",
-        "/discipline",
-        "/dmt",
-        "/meditate",
         "/about",
         "/Sign/Signin",
         "/Sign/Signup",
+        "/auth/login",
+        "/auth/register",
+        "/course/$courseId",
         "/plan/PlanPage",
         "/posts/$postId",
+        "/course/",
         "/posts/"
       ]
     },
     "/": {
       "filePath": "index.tsx"
-    },
-    "/discipline": {
-      "filePath": "discipline.tsx"
-    },
-    "/dmt": {
-      "filePath": "dmt.tsx"
-    },
-    "/meditate": {
-      "filePath": "meditate.tsx"
     },
     "/about": {
       "filePath": "about.lazy.tsx"
@@ -317,11 +331,23 @@ export const routeTree = rootRoute
     "/Sign/Signup": {
       "filePath": "Sign/Signup.tsx"
     },
+    "/auth/login": {
+      "filePath": "auth/login.tsx"
+    },
+    "/auth/register": {
+      "filePath": "auth/register.tsx"
+    },
+    "/course/$courseId": {
+      "filePath": "course/$courseId.tsx"
+    },
     "/plan/PlanPage": {
       "filePath": "plan/PlanPage.tsx"
     },
     "/posts/$postId": {
       "filePath": "posts/$postId.tsx"
+    },
+    "/course/": {
+      "filePath": "course/index.tsx"
     },
     "/posts/": {
       "filePath": "posts/index.tsx"

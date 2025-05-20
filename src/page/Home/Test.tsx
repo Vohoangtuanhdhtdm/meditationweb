@@ -1,15 +1,18 @@
-import { Accordion, AccordionContent, AccordionTrigger } from "@/components/ui/accordion"
-import { AlertDialog, AlertDialogAction, AlertDialogCancel, AlertDialogContent, AlertDialogDescription, AlertDialogFooter, AlertDialogHeader, AlertDialogTitle, AlertDialogTrigger } from "@/components/ui/alert-dialog"
-import { Button } from "@/components/ui/button"
-import { AccordionItem } from "@radix-ui/react-accordion"
-
+import { carouselData } from "@/types/data";
+import { Carousel } from "./Carousel";
+import { CarouselItem } from "./CarouselItem";
 
 const Test = () => {
-    return (
-       <h1 className="text-3xl font-bold underline">
-            Hello world!
-      </h1>
-      )
-}
+  return (
+    <section className="p-6">
+      <h2 className="text-2xl font-bold mb-6 text-center">Khám Phá Chủ Đề</h2>
+      <Carousel>
+        {carouselData.map((item, index) => (
+          <CarouselItem key={index} {...item} />
+        ))}
+      </Carousel>
+    </section>
+  );
+};
 
-export default Test
+export default Test;

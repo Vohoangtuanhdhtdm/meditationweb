@@ -1,4 +1,5 @@
-import LangingPage from "@/page/Home/LangingPage";
+import Landing from "@/components/module/Landing/Landing";
+
 import { createFileRoute } from "@tanstack/react-router";
 
 export const Route = createFileRoute("/")({
@@ -8,7 +9,9 @@ export const Route = createFileRoute("/")({
 function Index() {
   return (
     <div>
-      <LangingPage />
+      <Landing />
+      {/* <LandingPage /> */}
+      {/* <Test /> */}
     </div>
   );
 }
