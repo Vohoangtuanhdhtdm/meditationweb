@@ -44,28 +44,36 @@ export const Route = createRootRoute({
               Khóa học
             </Link>
           </Button>
+          <Button
+            variant="ghost"
+            className="text-gray-700 hover:text-teal-600 transition-colors"
+          >
+            <Link to="/admin/Assign_role" className="[&.active]:font-bold">
+              Phân Quyền
+            </Link>
+          </Button>
 
-          <Link to="/plan/PlanPage" className="block">
+          <Link to="/auth/profile" className="block">
             <Button
               variant="ghost"
               className="text-gray-700 hover:text-teal-600 transition-colors"
             >
-              Plan
+              Profile
             </Button>
           </Link>
 
-          <Link to="/Sign/Signin" className="block">
+          <Link to="/auth/login" className="block">
             <Button
               variant="ghost"
               className="text-gray-700 hover:text-teal-600 transition-colors"
             >
-              Sign In
+              Đăng nhập
             </Button>
           </Link>
 
-          <Link to="/Sign/Signup" className="block">
+          <Link to="/auth/register" className="block">
             <Button className="bg-gradient-to-r from-teal-500 to-lime-500 hover:from-teal-600 hover:to-lime-600 text-white rounded-full px-6 shadow-lg transition-all">
-              Sign Up
+              Đăng ký
             </Button>
           </Link>
         </nav>
@@ -118,15 +126,6 @@ export const Route = createRootRoute({
                 >
                   {" "}
                   Posts
-                </Link>
-              </li>
-              <li>
-                <Link
-                  to="/discipline"
-                  className="hover:text-white transition-colors"
-                >
-                  {" "}
-                  Meditation
                 </Link>
               </li>
             </ul>

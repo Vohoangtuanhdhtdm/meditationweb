@@ -1,9 +1,15 @@
-import { createFileRoute } from '@tanstack/react-router'
+import CourseDetail from "@/components/module/Course/CourseDetail";
+import { createFileRoute, useParams } from "@tanstack/react-router";
 
-export const Route = createFileRoute('/course/$courseId')({
+export const Route = createFileRoute("/course/$courseId")({
   component: RouteComponent,
-})
+});
 
 function RouteComponent() {
-  return <div>Hello "/course/$courseId"!</div>
+  const { courseId } = useParams({ from: "/course/$courseId" });
+  return (
+    <div>
+      <CourseDetail paramsCourseId={courseId} />
+    </div>
+  );
 }
