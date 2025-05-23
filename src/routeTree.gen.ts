@@ -20,7 +20,13 @@ import { Route as PostsPostIdImport } from './routes/posts/$postId'
 import { Route as PlanPlanPageImport } from './routes/plan/PlanPage'
 import { Route as CourseCourseIdImport } from './routes/course/$courseId'
 import { Route as AuthRegisterImport } from './routes/auth/register'
+import { Route as AuthProfileImport } from './routes/auth/profile'
 import { Route as AuthLoginImport } from './routes/auth/login'
+import { Route as AuthCallbackImport } from './routes/auth/callback'
+import { Route as AdminDashboardImport } from './routes/admin/dashboard'
+import { Route as AdminCreatectvImport } from './routes/admin/create_ctv'
+import { Route as AdminCreatecourseImport } from './routes/admin/create_course'
+import { Route as AdminAssignroleImport } from './routes/admin/Assign_role'
 import { Route as SignSignupImport } from './routes/Sign/Signup'
 import { Route as SignSigninImport } from './routes/Sign/Signin'
 
@@ -78,9 +84,45 @@ const AuthRegisterRoute = AuthRegisterImport.update({
   getParentRoute: () => rootRoute,
 } as any)
 
+const AuthProfileRoute = AuthProfileImport.update({
+  id: '/auth/profile',
+  path: '/auth/profile',
+  getParentRoute: () => rootRoute,
+} as any)
+
 const AuthLoginRoute = AuthLoginImport.update({
   id: '/auth/login',
   path: '/auth/login',
+  getParentRoute: () => rootRoute,
+} as any)
+
+const AuthCallbackRoute = AuthCallbackImport.update({
+  id: '/auth/callback',
+  path: '/auth/callback',
+  getParentRoute: () => rootRoute,
+} as any)
+
+const AdminDashboardRoute = AdminDashboardImport.update({
+  id: '/admin/dashboard',
+  path: '/admin/dashboard',
+  getParentRoute: () => rootRoute,
+} as any)
+
+const AdminCreatectvRoute = AdminCreatectvImport.update({
+  id: '/admin/create_ctv',
+  path: '/admin/create_ctv',
+  getParentRoute: () => rootRoute,
+} as any)
+
+const AdminCreatecourseRoute = AdminCreatecourseImport.update({
+  id: '/admin/create_course',
+  path: '/admin/create_course',
+  getParentRoute: () => rootRoute,
+} as any)
+
+const AdminAssignroleRoute = AdminAssignroleImport.update({
+  id: '/admin/Assign_role',
+  path: '/admin/Assign_role',
   getParentRoute: () => rootRoute,
 } as any)
 
@@ -128,11 +170,53 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof SignSignupImport
       parentRoute: typeof rootRoute
     }
+    '/admin/Assign_role': {
+      id: '/admin/Assign_role'
+      path: '/admin/Assign_role'
+      fullPath: '/admin/Assign_role'
+      preLoaderRoute: typeof AdminAssignroleImport
+      parentRoute: typeof rootRoute
+    }
+    '/admin/create_course': {
+      id: '/admin/create_course'
+      path: '/admin/create_course'
+      fullPath: '/admin/create_course'
+      preLoaderRoute: typeof AdminCreatecourseImport
+      parentRoute: typeof rootRoute
+    }
+    '/admin/create_ctv': {
+      id: '/admin/create_ctv'
+      path: '/admin/create_ctv'
+      fullPath: '/admin/create_ctv'
+      preLoaderRoute: typeof AdminCreatectvImport
+      parentRoute: typeof rootRoute
+    }
+    '/admin/dashboard': {
+      id: '/admin/dashboard'
+      path: '/admin/dashboard'
+      fullPath: '/admin/dashboard'
+      preLoaderRoute: typeof AdminDashboardImport
+      parentRoute: typeof rootRoute
+    }
+    '/auth/callback': {
+      id: '/auth/callback'
+      path: '/auth/callback'
+      fullPath: '/auth/callback'
+      preLoaderRoute: typeof AuthCallbackImport
+      parentRoute: typeof rootRoute
+    }
     '/auth/login': {
       id: '/auth/login'
       path: '/auth/login'
       fullPath: '/auth/login'
       preLoaderRoute: typeof AuthLoginImport
+      parentRoute: typeof rootRoute
+    }
+    '/auth/profile': {
+      id: '/auth/profile'
+      path: '/auth/profile'
+      fullPath: '/auth/profile'
+      preLoaderRoute: typeof AuthProfileImport
       parentRoute: typeof rootRoute
     }
     '/auth/register': {
@@ -187,7 +271,13 @@ export interface FileRoutesByFullPath {
   '/about': typeof AboutLazyRoute
   '/Sign/Signin': typeof SignSigninRoute
   '/Sign/Signup': typeof SignSignupRoute
+  '/admin/Assign_role': typeof AdminAssignroleRoute
+  '/admin/create_course': typeof AdminCreatecourseRoute
+  '/admin/create_ctv': typeof AdminCreatectvRoute
+  '/admin/dashboard': typeof AdminDashboardRoute
+  '/auth/callback': typeof AuthCallbackRoute
   '/auth/login': typeof AuthLoginRoute
+  '/auth/profile': typeof AuthProfileRoute
   '/auth/register': typeof AuthRegisterRoute
   '/course/$courseId': typeof CourseCourseIdRoute
   '/plan/PlanPage': typeof PlanPlanPageRoute
@@ -201,7 +291,13 @@ export interface FileRoutesByTo {
   '/about': typeof AboutLazyRoute
   '/Sign/Signin': typeof SignSigninRoute
   '/Sign/Signup': typeof SignSignupRoute
+  '/admin/Assign_role': typeof AdminAssignroleRoute
+  '/admin/create_course': typeof AdminCreatecourseRoute
+  '/admin/create_ctv': typeof AdminCreatectvRoute
+  '/admin/dashboard': typeof AdminDashboardRoute
+  '/auth/callback': typeof AuthCallbackRoute
   '/auth/login': typeof AuthLoginRoute
+  '/auth/profile': typeof AuthProfileRoute
   '/auth/register': typeof AuthRegisterRoute
   '/course/$courseId': typeof CourseCourseIdRoute
   '/plan/PlanPage': typeof PlanPlanPageRoute
@@ -216,7 +312,13 @@ export interface FileRoutesById {
   '/about': typeof AboutLazyRoute
   '/Sign/Signin': typeof SignSigninRoute
   '/Sign/Signup': typeof SignSignupRoute
+  '/admin/Assign_role': typeof AdminAssignroleRoute
+  '/admin/create_course': typeof AdminCreatecourseRoute
+  '/admin/create_ctv': typeof AdminCreatectvRoute
+  '/admin/dashboard': typeof AdminDashboardRoute
+  '/auth/callback': typeof AuthCallbackRoute
   '/auth/login': typeof AuthLoginRoute
+  '/auth/profile': typeof AuthProfileRoute
   '/auth/register': typeof AuthRegisterRoute
   '/course/$courseId': typeof CourseCourseIdRoute
   '/plan/PlanPage': typeof PlanPlanPageRoute
@@ -232,7 +334,13 @@ export interface FileRouteTypes {
     | '/about'
     | '/Sign/Signin'
     | '/Sign/Signup'
+    | '/admin/Assign_role'
+    | '/admin/create_course'
+    | '/admin/create_ctv'
+    | '/admin/dashboard'
+    | '/auth/callback'
     | '/auth/login'
+    | '/auth/profile'
     | '/auth/register'
     | '/course/$courseId'
     | '/plan/PlanPage'
@@ -245,7 +353,13 @@ export interface FileRouteTypes {
     | '/about'
     | '/Sign/Signin'
     | '/Sign/Signup'
+    | '/admin/Assign_role'
+    | '/admin/create_course'
+    | '/admin/create_ctv'
+    | '/admin/dashboard'
+    | '/auth/callback'
     | '/auth/login'
+    | '/auth/profile'
     | '/auth/register'
     | '/course/$courseId'
     | '/plan/PlanPage'
@@ -258,7 +372,13 @@ export interface FileRouteTypes {
     | '/about'
     | '/Sign/Signin'
     | '/Sign/Signup'
+    | '/admin/Assign_role'
+    | '/admin/create_course'
+    | '/admin/create_ctv'
+    | '/admin/dashboard'
+    | '/auth/callback'
     | '/auth/login'
+    | '/auth/profile'
     | '/auth/register'
     | '/course/$courseId'
     | '/plan/PlanPage'
@@ -273,7 +393,13 @@ export interface RootRouteChildren {
   AboutLazyRoute: typeof AboutLazyRoute
   SignSigninRoute: typeof SignSigninRoute
   SignSignupRoute: typeof SignSignupRoute
+  AdminAssignroleRoute: typeof AdminAssignroleRoute
+  AdminCreatecourseRoute: typeof AdminCreatecourseRoute
+  AdminCreatectvRoute: typeof AdminCreatectvRoute
+  AdminDashboardRoute: typeof AdminDashboardRoute
+  AuthCallbackRoute: typeof AuthCallbackRoute
   AuthLoginRoute: typeof AuthLoginRoute
+  AuthProfileRoute: typeof AuthProfileRoute
   AuthRegisterRoute: typeof AuthRegisterRoute
   CourseCourseIdRoute: typeof CourseCourseIdRoute
   PlanPlanPageRoute: typeof PlanPlanPageRoute
@@ -287,7 +413,13 @@ const rootRouteChildren: RootRouteChildren = {
   AboutLazyRoute: AboutLazyRoute,
   SignSigninRoute: SignSigninRoute,
   SignSignupRoute: SignSignupRoute,
+  AdminAssignroleRoute: AdminAssignroleRoute,
+  AdminCreatecourseRoute: AdminCreatecourseRoute,
+  AdminCreatectvRoute: AdminCreatectvRoute,
+  AdminDashboardRoute: AdminDashboardRoute,
+  AuthCallbackRoute: AuthCallbackRoute,
   AuthLoginRoute: AuthLoginRoute,
+  AuthProfileRoute: AuthProfileRoute,
   AuthRegisterRoute: AuthRegisterRoute,
   CourseCourseIdRoute: CourseCourseIdRoute,
   PlanPlanPageRoute: PlanPlanPageRoute,
@@ -310,7 +442,13 @@ export const routeTree = rootRoute
         "/about",
         "/Sign/Signin",
         "/Sign/Signup",
+        "/admin/Assign_role",
+        "/admin/create_course",
+        "/admin/create_ctv",
+        "/admin/dashboard",
+        "/auth/callback",
         "/auth/login",
+        "/auth/profile",
         "/auth/register",
         "/course/$courseId",
         "/plan/PlanPage",
@@ -331,8 +469,26 @@ export const routeTree = rootRoute
     "/Sign/Signup": {
       "filePath": "Sign/Signup.tsx"
     },
+    "/admin/Assign_role": {
+      "filePath": "admin/Assign_role.tsx"
+    },
+    "/admin/create_course": {
+      "filePath": "admin/create_course.tsx"
+    },
+    "/admin/create_ctv": {
+      "filePath": "admin/create_ctv.tsx"
+    },
+    "/admin/dashboard": {
+      "filePath": "admin/dashboard.tsx"
+    },
+    "/auth/callback": {
+      "filePath": "auth/callback.tsx"
+    },
     "/auth/login": {
       "filePath": "auth/login.tsx"
+    },
+    "/auth/profile": {
+      "filePath": "auth/profile.tsx"
     },
     "/auth/register": {
       "filePath": "auth/register.tsx"
