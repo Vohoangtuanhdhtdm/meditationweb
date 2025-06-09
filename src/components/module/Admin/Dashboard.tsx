@@ -13,7 +13,7 @@ export const Dashboard = () => {
       <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
         <Card>
           <CardHeader>
-            <CardTitle>Quản lý người dùng</CardTitle>
+            <CardTitle>Quản lý nhân viên</CardTitle>
           </CardHeader>
           <CardContent>
             <p className="text-sm text-muted-foreground mb-4">
@@ -36,7 +36,12 @@ export const Dashboard = () => {
             <p className="text-sm text-muted-foreground mb-4">
               Gán vai trò (role) cho người dùng như User, Editor, Admin.
             </p>
-            <Button variant="default">Truy cập</Button>
+            <Button
+              onClick={() => navigate({ to: "/admin/Assign_role" })}
+              variant="default"
+            >
+              Truy cập
+            </Button>
           </CardContent>
         </Card>
 
@@ -59,13 +64,18 @@ export const Dashboard = () => {
 
         <Card>
           <CardHeader>
-            <CardTitle>Quản lý nhân viên</CardTitle>
+            <CardTitle>Quản lý người dùng</CardTitle>
           </CardHeader>
           <CardContent>
             <p className="text-sm text-muted-foreground mb-4">
               Thay đổi cài đặt ứng dụng, giao diện, thông báo,...
             </p>
-            <Button variant="default">Truy cập</Button>
+            <Button
+              onClick={() => navigate({ to: "/admin/manage_user" })}
+              variant="default"
+            >
+              Truy cập
+            </Button>
           </CardContent>
         </Card>
       </div>

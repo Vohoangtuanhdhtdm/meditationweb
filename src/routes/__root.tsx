@@ -44,14 +44,6 @@ export const Route = createRootRoute({
               Khóa học
             </Link>
           </Button>
-          <Button
-            variant="ghost"
-            className="text-gray-700 hover:text-teal-600 transition-colors"
-          >
-            <Link to="/admin/Assign_role" className="[&.active]:font-bold">
-              Phân Quyền
-            </Link>
-          </Button>
 
           <Link to="/auth/profile" className="block">
             <Button

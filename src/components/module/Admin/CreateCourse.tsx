@@ -11,15 +11,7 @@ import {
 import { Separator } from "@/components/ui/separator";
 import { Textarea } from "@/components/ui/textarea";
 import { api } from "@/services/api";
-import {
-  ContentCourseDto,
-  CourseDto,
-  CreateContentCourseDto,
-  CreateCourseDto,
-  CreateLessonCourseDto,
-  CreatePhaseCourseDto,
-  PhaseCourseDto,
-} from "@/types/course.type";
+import { CourseDto, CreateCourseDto } from "@/types/course.type";
 import { CTVDto } from "@/types/ctv.type";
 import { useNavigate } from "@tanstack/react-router";
 import Cookies from "js-cookie";
@@ -34,26 +26,12 @@ export default function CreateCourse() {
     price: 0,
     ctvId: "",
   });
-  const [phase, setPhase] = useState<CreatePhaseCourseDto>({
-    title: "",
-    courseId: "",
-  });
-  const [content, setContent] = useState<CreateContentCourseDto>({
-    title: "",
-    description: "",
-    phaseCourseId: "",
-  });
-  const [lesson, setLesson] = useState<CreateLessonCourseDto>({
-    title: "",
-    videoUrl: "",
-    duration: 0,
-    contentCourseId: "",
-  });
+
   const [ctvs, setCtvs] = useState<CTVDto[]>([]);
   const [courses, setCourses] = useState<CourseDto[]>([]);
   const [loading, setLoading] = useState(false);
   const roles = JSON.parse(Cookies.get("roles") || "[]") as string[];
-  // Check for Admin role
+
   useEffect(() => {
     if (!roles.includes("Admin")) {
       toast.error("Bạn cần quyền Admin để truy cập chức năng này");
@@ -61,7 +39,6 @@ export default function CreateCourse() {
     }
   }, [roles, navigate]);
 
-  // Fetch CTVs for selection
   useEffect(() => {
     const fetchCtvs = async () => {
       try {
@@ -74,7 +51,6 @@ export default function CreateCourse() {
     fetchCtvs();
   }, []);
 
-  // Fetch existing courses
   useEffect(() => {
     const fetchCourses = async () => {
       try {
@@ -93,52 +69,10 @@ export default function CreateCourse() {
     try {
       const response = await api.post("/Course", course);
       const newCourse: CourseDto = response.data;
-      setPhase({ ...phase, courseId: newCourse.id });
       setCourses([...courses, newCourse]);
       toast.success("Tạo khóa học thành công");
     } catch (error) {
       toast.error(`Không tạo được khóa học ${error}`);
-    } finally {
-      setLoading(false);
-    }
-  };
-
-  const handleCreatePhase = async (e: React.FormEvent) => {
-    e.preventDefault();
-    setLoading(true);
-    try {
-      const response = await api.post("/PhaseCourse", phase);
-      const newPhase: PhaseCourseDto = response.data;
-      setContent({ ...content, phaseCourseId: newPhase.id });
-      toast.success("Tạo giai đoạn thành công");
-    } catch (error) {
-      toast.error(`Không thể tạo giai đoạn ${error}`);
-    } finally {
-      setLoading(false);
-    }
-  };
-  const handleCreateContent = async (e: React.FormEvent) => {
-    e.preventDefault();
-    setLoading(true);
-    try {
-      const response = await api.post("/ContentCourse", content);
-      const newContent: ContentCourseDto = response.data;
-      setLesson({ ...lesson, contentCourseId: newContent.id });
-      toast.success("Tạo nội dung thành công");
-    } catch (error) {
-      toast.error(`Không thể tạo nội dung ${error}`);
-    } finally {
-      setLoading(false);
-    }
-  };
-  const handleCreateLesson = async (e: React.FormEvent) => {
-    e.preventDefault();
-    setLoading(true);
-    try {
-      await api.post("/LessonCourse", lesson);
-      toast.success("Tạo bài học thành công");
-    } catch (error) {
-      toast.error(`Không thể tạo bài học ${error}`);
     } finally {
       setLoading(false);
     }
@@ -153,15 +87,26 @@ export default function CreateCourse() {
       toast.error(`Không xóa khóa học ${error}`);
     }
   };
+
   return (
-    <div>
-      <div className="max-w-5xl mx-auto p-6 space-y-6">
-        <h1 className="text-3xl font-bold">Tạo khóa học mới</h1>
+    <div className="min-h-screen bg-muted/50 py-10">
+      <div className="max-w-4xl mx-auto px-4 space-y-8">
+        {/* Header */}
+        <div className="flex items-center justify-between">
+          <h1 className="text-3xl font-semibold">Tạo khóa học mới</h1>
+          <Button variant="outline" onClick={() => navigate({ to: "/" })}>
+            🔙 Quay lại
+          </Button>
+        </div>
+
         <Separator />
+
         {/* Course Form */}
         <Card>
           <CardHeader>
-            <CardTitle>Tạo khóa học</CardTitle>
+            <CardTitle className="text-lg font-medium">
+              Thông tin khóa học
+            </CardTitle>
           </CardHeader>
           <CardContent>
             <form onSubmit={handleCreateCourse} className="space-y-4">
@@ -207,130 +152,45 @@ export default function CreateCourse() {
                   ))}
                 </SelectContent>
               </Select>
-              <Button type="submit" disabled={loading}>
-                {loading ? "Đang tạo..." : "Tạo khóa học"}
-              </Button>
+              <div className="flex items-center justify-between">
+                <Button type="submit" disabled={loading} className="w-full">
+                  {loading ? "Đang tạo..." : "✅ Tạo khóa học"}
+                </Button>
+              </div>
             </form>
-          </CardContent>
-        </Card>
 
-        {/* Phase Form */}
-        <Card>
-          <CardHeader>
-            <CardTitle>Tạo giai đoạn</CardTitle>
-          </CardHeader>
-          <CardContent>
-            <form onSubmit={handleCreatePhase} className="space-y-4">
-              <Input
-                placeholder="Tiêu đề giai đoạn"
-                value={phase.title}
-                onChange={(e) => setPhase({ ...phase, title: e.target.value })}
-                required
-              />
-              <Button type="submit" disabled={loading || !phase.courseId}>
-                {loading ? "Đang tạo..." : "Tạo giai đoạn"}
-              </Button>
-            </form>
-          </CardContent>
-        </Card>
-
-        {/* Content Form */}
-        <Card>
-          <CardHeader>
-            <CardTitle>Tạo nội dung</CardTitle>
-          </CardHeader>
-          <CardContent>
-            <form onSubmit={handleCreateContent} className="space-y-4">
-              <Input
-                placeholder="Tiêu đề nội dung"
-                value={content.title}
-                onChange={(e) =>
-                  setContent({ ...content, title: e.target.value })
-                }
-                required
-              />
-              <Textarea
-                placeholder="Mô tả nội dung"
-                value={content.description}
-                onChange={(e) =>
-                  setContent({ ...content, description: e.target.value })
-                }
-                required
-              />
+            <div className="pt-4 text-right">
               <Button
-                type="submit"
-                disabled={loading || !content.phaseCourseId}
+                variant="ghost"
+                onClick={() => navigate({ to: "/admin/create_phase" })}
               >
-                {loading ? "Đang tạo..." : "Tạo nội dung"}
+                ➕ Tiếp theo
               </Button>
-            </form>
-          </CardContent>
-        </Card>
-
-        {/* Lesson Form */}
-        <Card>
-          <CardHeader>
-            <CardTitle>Tạo bài học</CardTitle>
-          </CardHeader>
-          <CardContent>
-            <form onSubmit={handleCreateLesson} className="space-y-4">
-              <Input
-                placeholder="Tiêu đề bài học"
-                value={lesson.title}
-                onChange={(e) =>
-                  setLesson({ ...lesson, title: e.target.value })
-                }
-                required
-              />
-              <Input
-                placeholder="URL video"
-                value={lesson.videoUrl}
-                onChange={(e) =>
-                  setLesson({ ...lesson, videoUrl: e.target.value })
-                }
-                required
-              />
-              <Input
-                type="number"
-                placeholder="Thời lượng (phút)"
-                value={lesson.duration}
-                onChange={(e) =>
-                  setLesson({ ...lesson, duration: parseInt(e.target.value) })
-                }
-                required
-              />
-              <Button
-                type="submit"
-                disabled={loading || !lesson.contentCourseId}
-              >
-                {loading ? "Đang tạo..." : "Tạo bài học"}
-              </Button>
-            </form>
+            </div>
           </CardContent>
         </Card>
 
         {/* Course List */}
         <Card>
           <CardHeader>
-            <CardTitle>Danh sách khóa học</CardTitle>
+            <CardTitle className="text-lg font-medium">
+              Danh sách khóa học
+            </CardTitle>
           </CardHeader>
-          <CardContent>
+          <CardContent className="space-y-3">
             {courses.map((course) => (
               <div
                 key={course.id}
-                className="flex justify-between items-center py-2"
+                className="flex items-center justify-between bg-white border rounded-lg p-3 shadow-sm"
               >
-                <span>{course.title}</span>
-                <div>
-                  <Button
-                    variant="outline"
-                    className="mr-2"
-                    // onClick={() => navigate(`/courses/edit/${course.id}`)}
-                  >
+                <div className="text-sm font-medium">{course.title}</div>
+                <div className="flex gap-2">
+                  <Button variant="outline" size="sm">
                     Sửa
                   </Button>
                   <Button
                     variant="destructive"
+                    size="sm"
                     onClick={() => handleDeleteCourse(course.id)}
                   >
                     Xóa
