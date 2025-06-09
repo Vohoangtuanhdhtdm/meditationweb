@@ -23,9 +23,13 @@ import { Route as AuthRegisterImport } from './routes/auth/register'
 import { Route as AuthProfileImport } from './routes/auth/profile'
 import { Route as AuthLoginImport } from './routes/auth/login'
 import { Route as AuthCallbackImport } from './routes/auth/callback'
+import { Route as AdminManageuserImport } from './routes/admin/manage_user'
 import { Route as AdminDashboardImport } from './routes/admin/dashboard'
+import { Route as AdminCreatephaseImport } from './routes/admin/create_phase'
+import { Route as AdminCreatelessonImport } from './routes/admin/create_lesson'
 import { Route as AdminCreatectvImport } from './routes/admin/create_ctv'
 import { Route as AdminCreatecourseImport } from './routes/admin/create_course'
+import { Route as AdminCreatecontentImport } from './routes/admin/create_content'
 import { Route as AdminAssignroleImport } from './routes/admin/Assign_role'
 import { Route as SignSignupImport } from './routes/Sign/Signup'
 import { Route as SignSigninImport } from './routes/Sign/Signin'
@@ -102,9 +106,27 @@ const AuthCallbackRoute = AuthCallbackImport.update({
   getParentRoute: () => rootRoute,
 } as any)
 
+const AdminManageuserRoute = AdminManageuserImport.update({
+  id: '/admin/manage_user',
+  path: '/admin/manage_user',
+  getParentRoute: () => rootRoute,
+} as any)
+
 const AdminDashboardRoute = AdminDashboardImport.update({
   id: '/admin/dashboard',
   path: '/admin/dashboard',
+  getParentRoute: () => rootRoute,
+} as any)
+
+const AdminCreatephaseRoute = AdminCreatephaseImport.update({
+  id: '/admin/create_phase',
+  path: '/admin/create_phase',
+  getParentRoute: () => rootRoute,
+} as any)
+
+const AdminCreatelessonRoute = AdminCreatelessonImport.update({
+  id: '/admin/create_lesson',
+  path: '/admin/create_lesson',
   getParentRoute: () => rootRoute,
 } as any)
 
@@ -117,6 +139,12 @@ const AdminCreatectvRoute = AdminCreatectvImport.update({
 const AdminCreatecourseRoute = AdminCreatecourseImport.update({
   id: '/admin/create_course',
   path: '/admin/create_course',
+  getParentRoute: () => rootRoute,
+} as any)
+
+const AdminCreatecontentRoute = AdminCreatecontentImport.update({
+  id: '/admin/create_content',
+  path: '/admin/create_content',
   getParentRoute: () => rootRoute,
 } as any)
 
@@ -177,6 +205,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AdminAssignroleImport
       parentRoute: typeof rootRoute
     }
+    '/admin/create_content': {
+      id: '/admin/create_content'
+      path: '/admin/create_content'
+      fullPath: '/admin/create_content'
+      preLoaderRoute: typeof AdminCreatecontentImport
+      parentRoute: typeof rootRoute
+    }
     '/admin/create_course': {
       id: '/admin/create_course'
       path: '/admin/create_course'
@@ -191,11 +226,32 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AdminCreatectvImport
       parentRoute: typeof rootRoute
     }
+    '/admin/create_lesson': {
+      id: '/admin/create_lesson'
+      path: '/admin/create_lesson'
+      fullPath: '/admin/create_lesson'
+      preLoaderRoute: typeof AdminCreatelessonImport
+      parentRoute: typeof rootRoute
+    }
+    '/admin/create_phase': {
+      id: '/admin/create_phase'
+      path: '/admin/create_phase'
+      fullPath: '/admin/create_phase'
+      preLoaderRoute: typeof AdminCreatephaseImport
+      parentRoute: typeof rootRoute
+    }
     '/admin/dashboard': {
       id: '/admin/dashboard'
       path: '/admin/dashboard'
       fullPath: '/admin/dashboard'
       preLoaderRoute: typeof AdminDashboardImport
+      parentRoute: typeof rootRoute
+    }
+    '/admin/manage_user': {
+      id: '/admin/manage_user'
+      path: '/admin/manage_user'
+      fullPath: '/admin/manage_user'
+      preLoaderRoute: typeof AdminManageuserImport
       parentRoute: typeof rootRoute
     }
     '/auth/callback': {
@@ -272,9 +328,13 @@ export interface FileRoutesByFullPath {
   '/Sign/Signin': typeof SignSigninRoute
   '/Sign/Signup': typeof SignSignupRoute
   '/admin/Assign_role': typeof AdminAssignroleRoute
+  '/admin/create_content': typeof AdminCreatecontentRoute
   '/admin/create_course': typeof AdminCreatecourseRoute
   '/admin/create_ctv': typeof AdminCreatectvRoute
+  '/admin/create_lesson': typeof AdminCreatelessonRoute
+  '/admin/create_phase': typeof AdminCreatephaseRoute
   '/admin/dashboard': typeof AdminDashboardRoute
+  '/admin/manage_user': typeof AdminManageuserRoute
   '/auth/callback': typeof AuthCallbackRoute
   '/auth/login': typeof AuthLoginRoute
   '/auth/profile': typeof AuthProfileRoute
@@ -292,9 +352,13 @@ export interface FileRoutesByTo {
   '/Sign/Signin': typeof SignSigninRoute
   '/Sign/Signup': typeof SignSignupRoute
   '/admin/Assign_role': typeof AdminAssignroleRoute
+  '/admin/create_content': typeof AdminCreatecontentRoute
   '/admin/create_course': typeof AdminCreatecourseRoute
   '/admin/create_ctv': typeof AdminCreatectvRoute
+  '/admin/create_lesson': typeof AdminCreatelessonRoute
+  '/admin/create_phase': typeof AdminCreatephaseRoute
   '/admin/dashboard': typeof AdminDashboardRoute
+  '/admin/manage_user': typeof AdminManageuserRoute
   '/auth/callback': typeof AuthCallbackRoute
   '/auth/login': typeof AuthLoginRoute
   '/auth/profile': typeof AuthProfileRoute
@@ -313,9 +377,13 @@ export interface FileRoutesById {
   '/Sign/Signin': typeof SignSigninRoute
   '/Sign/Signup': typeof SignSignupRoute
   '/admin/Assign_role': typeof AdminAssignroleRoute
+  '/admin/create_content': typeof AdminCreatecontentRoute
   '/admin/create_course': typeof AdminCreatecourseRoute
   '/admin/create_ctv': typeof AdminCreatectvRoute
+  '/admin/create_lesson': typeof AdminCreatelessonRoute
+  '/admin/create_phase': typeof AdminCreatephaseRoute
   '/admin/dashboard': typeof AdminDashboardRoute
+  '/admin/manage_user': typeof AdminManageuserRoute
   '/auth/callback': typeof AuthCallbackRoute
   '/auth/login': typeof AuthLoginRoute
   '/auth/profile': typeof AuthProfileRoute
@@ -335,9 +403,13 @@ export interface FileRouteTypes {
     | '/Sign/Signin'
     | '/Sign/Signup'
     | '/admin/Assign_role'
+    | '/admin/create_content'
     | '/admin/create_course'
     | '/admin/create_ctv'
+    | '/admin/create_lesson'
+    | '/admin/create_phase'
     | '/admin/dashboard'
+    | '/admin/manage_user'
     | '/auth/callback'
     | '/auth/login'
     | '/auth/profile'
@@ -354,9 +426,13 @@ export interface FileRouteTypes {
     | '/Sign/Signin'
     | '/Sign/Signup'
     | '/admin/Assign_role'
+    | '/admin/create_content'
     | '/admin/create_course'
     | '/admin/create_ctv'
+    | '/admin/create_lesson'
+    | '/admin/create_phase'
     | '/admin/dashboard'
+    | '/admin/manage_user'
     | '/auth/callback'
     | '/auth/login'
     | '/auth/profile'
@@ -373,9 +449,13 @@ export interface FileRouteTypes {
     | '/Sign/Signin'
     | '/Sign/Signup'
     | '/admin/Assign_role'
+    | '/admin/create_content'
     | '/admin/create_course'
     | '/admin/create_ctv'
+    | '/admin/create_lesson'
+    | '/admin/create_phase'
     | '/admin/dashboard'
+    | '/admin/manage_user'
     | '/auth/callback'
     | '/auth/login'
     | '/auth/profile'
@@ -394,9 +474,13 @@ export interface RootRouteChildren {
   SignSigninRoute: typeof SignSigninRoute
   SignSignupRoute: typeof SignSignupRoute
   AdminAssignroleRoute: typeof AdminAssignroleRoute
+  AdminCreatecontentRoute: typeof AdminCreatecontentRoute
   AdminCreatecourseRoute: typeof AdminCreatecourseRoute
   AdminCreatectvRoute: typeof AdminCreatectvRoute
+  AdminCreatelessonRoute: typeof AdminCreatelessonRoute
+  AdminCreatephaseRoute: typeof AdminCreatephaseRoute
   AdminDashboardRoute: typeof AdminDashboardRoute
+  AdminManageuserRoute: typeof AdminManageuserRoute
   AuthCallbackRoute: typeof AuthCallbackRoute
   AuthLoginRoute: typeof AuthLoginRoute
   AuthProfileRoute: typeof AuthProfileRoute
@@ -414,9 +498,13 @@ const rootRouteChildren: RootRouteChildren = {
   SignSigninRoute: SignSigninRoute,
   SignSignupRoute: SignSignupRoute,
   AdminAssignroleRoute: AdminAssignroleRoute,
+  AdminCreatecontentRoute: AdminCreatecontentRoute,
   AdminCreatecourseRoute: AdminCreatecourseRoute,
   AdminCreatectvRoute: AdminCreatectvRoute,
+  AdminCreatelessonRoute: AdminCreatelessonRoute,
+  AdminCreatephaseRoute: AdminCreatephaseRoute,
   AdminDashboardRoute: AdminDashboardRoute,
+  AdminManageuserRoute: AdminManageuserRoute,
   AuthCallbackRoute: AuthCallbackRoute,
   AuthLoginRoute: AuthLoginRoute,
   AuthProfileRoute: AuthProfileRoute,
@@ -443,9 +531,13 @@ export const routeTree = rootRoute
         "/Sign/Signin",
         "/Sign/Signup",
         "/admin/Assign_role",
+        "/admin/create_content",
         "/admin/create_course",
         "/admin/create_ctv",
+        "/admin/create_lesson",
+        "/admin/create_phase",
         "/admin/dashboard",
+        "/admin/manage_user",
         "/auth/callback",
         "/auth/login",
         "/auth/profile",
@@ -472,14 +564,26 @@ export const routeTree = rootRoute
     "/admin/Assign_role": {
       "filePath": "admin/Assign_role.tsx"
     },
+    "/admin/create_content": {
+      "filePath": "admin/create_content.tsx"
+    },
     "/admin/create_course": {
       "filePath": "admin/create_course.tsx"
     },
     "/admin/create_ctv": {
       "filePath": "admin/create_ctv.tsx"
     },
+    "/admin/create_lesson": {
+      "filePath": "admin/create_lesson.tsx"
+    },
+    "/admin/create_phase": {
+      "filePath": "admin/create_phase.tsx"
+    },
     "/admin/dashboard": {
       "filePath": "admin/dashboard.tsx"
+    },
+    "/admin/manage_user": {
+      "filePath": "admin/manage_user.tsx"
     },
     "/auth/callback": {
       "filePath": "auth/callback.tsx"
